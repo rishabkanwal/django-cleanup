@@ -89,7 +89,7 @@ def delete_all_post_delete(sender, instance, using, **kwargs):
 
 def delete_file(instance, field_name, file_, using):
     '''Deletes a file'''
-    if not file_.name:
+    if not file_.name or (cache.ignored_prefixes and file_.name.startswith(cache.ignored_prefixes)):
         return
 
     # this will run after a successful commit for django 1.9+

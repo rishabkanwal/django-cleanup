@@ -6,12 +6,16 @@ from __future__ import unicode_literals
 from collections import defaultdict
 
 from django.apps import apps
+from django.conf import settings
 from django.db import models
 from django.utils import six
 from django.utils.module_loading import import_string
 
 
 CACHE_NAME = '_django_cleanup_original_cache'
+
+if hasattr(settings, 'DJANGO_CLEANUP_IGNORED_PREFIXES'):
+    ignored_prefixes = settings.DJANGO_CLEANUP_IGNORED_PREFIXES
 
 
 def fields_default():
